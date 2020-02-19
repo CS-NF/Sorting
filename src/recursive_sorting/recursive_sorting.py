@@ -1,11 +1,42 @@
 # TO-DO: complete the helpe function below to merge 2 sorted arrays
 # pseudocode 
-def merge( arrA, arrB ):
-    elements = len( arrA ) + len( arrB )
+def merge(arrA, arrB):
+    elements = len(arrA) + len(arrB)
     merged_arr = [0] * elements
     # TO-DO
     
+    a = 0
+    b = 0
+
+    for i in range(0, elements):
+        # if arrA is done
+        if a >= len(arrA):
+            merged_arr[i] = arrB[b]
+            b += 1
+        # if arrB is done
+        elif b >= len(arrB):
+            merged_arr[i] = arrA[a]
+            a += 1
+        # if arrA is smaller then arrB    
+        elif arrA[a] <= arrB[b]:
+            merged_arr[i] = arrA[a]
+            a += 1
+        # if arrA is bigger then arrB
+        else:
+            merged_arr[i] = arrB[b]
+            b += 1
+    
+
     return merged_arr
+
+
+        # if arrA[a] < arrB[b]:
+        #     merged_arr[i] = arrA[a]
+        #     a += 1
+        # # if arrA is bigger then arrB
+        # else:
+        #     merged_arr[i] = arrB[b]
+        #     b += 1
 
 
 # TO-DO: implement the Merge Sort function below USING RECURSION
@@ -18,19 +49,21 @@ def merge( arrA, arrB ):
 # do recursion by calling merge_sort with the argumenet of the second half of the list 
 # FINAL SETP: create a variable called arr that's equal to the recursive function and return the variable  
 
-def merge_sort( arr ):
+def merge_sort(arr):
     # TO-DO
-  if len(arr) > 1:
+  if len(arr) <= 1:
+      return arr
+  else:
       middle = len(arr) // 2
       first = arr[0: middle]
       second = arr[middle:]
 
-      arr_a = merge_sort(first)
-      arr_b = merge_sort(second)
+      arrA = merge_sort(first)
+      arrB = merge_sort(second)
 
-      arr = merge(arr_a, arr_b)
+      arr = merge(arrA, arrB)
     
-    return arr
+      return arr
 
 
 
